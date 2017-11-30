@@ -1,0 +1,178 @@
+############################################################################
+############################################################################
+# These are just some simple formatting function, so things are pretty :)
+############################################################################
+function heading () {
+  echo
+  headline "1;7m" "DEVIGATOR"
+  headline "3;7m" "$1 $2"
+}
+
+function headline () {
+  printf "\e[$1 %-45s\e[0m\n" "$2"
+}
+
+function line () {
+  printf "%-45s\n" " $1 "
+}
+
+function color () {
+  printf "\e[$1$2\e[0m"
+}
+
+function horizon {
+  echo ----------------------------------------------
+}
+
+
+
+############################################################################
+############################################################################
+# Check that devigator has been sourced, else can't cd into directories.
+# There should be an alias in ~/.bash_profile which auto sources the command
+############################################################################
+[[ "$0" != "$BASH_SOURCE" ]] && sourced=1 || sourced=0;
+if [[ $sourced -eq 0 ]]; then
+    heading "Unsourced Operation"
+    horizon
+    line "`color "31;1m" "Error"` Your command was not sourced!"
+    horizon
+    line "Iether prepend your request with `color "1m" "source"` or"
+    line "create an `color "1m" "alias"` in `color "1m" "~/.bash_profile"`"
+    line "that sources for you."
+    horizon
+    echo
+    exit 1
+fi
+
+
+
+#########################################################################
+#########################################################################
+# Only one VARIABLE. It should point to your developmend directory.
+#########################################################################
+directory=~/development/projects/;
+
+
+
+############################################################################
+############################################################################
+# These are our FUNCTIONS :) They're used for functioning...
+############################################################################
+function goToDirectory () {
+    cd $1 &&
+    location="${PWD##*/}" &&
+    working_dir="Now working out of: `color "1m" "$location"`" &&
+    
+    # check if directory uses git, store as true/false.
+    [[ `git rev-parse --is-inside-work-tree 2>/dev/null` ]] && 
+    is_git=true || is_git=false
+
+    horizon
+    line "Now working out of: `color "1m" "$location"`"
+    horizon
+    line "Git enabled: `color "1m" "$is_git"`"
+    horizon
+    
+    if [[ "$is_git" == "true" ]]; then
+      status="`git status -s`"
+      branch="`git rev-parse --abbrev-ref HEAD 2>/dev/null`"
+      line "Working branch: `color "1m" "$branch"`"
+      horizon
+      if [[ "$status" != "" ]]; then
+        headline "3;7m" "Repository Status"
+        horizon 
+        IFS=$'\n'
+        for stat in $status; do
+          shopt -s extglob
+            line "${stat##*( )}"
+          shopt -u extglob
+        done
+        unset IFS
+        horizon
+      fi
+    fi
+    echo
+}
+
+function getHelp {
+  horizon
+  line "`color "1m" ". devigator"` - cd projects directory"
+  horizon
+  line "`color "1m" ". devigator li"` - list all projects"
+  horizon
+  line "`color "1m" ". devigator help"` - list available commands"
+  horizon
+  line "`color "1m" ". devigator [project]"` - cd into project"
+  horizon
+  line "`color "1m" ". devigator [project] ls"` - list project files"
+  horizon
+  line "The `color "1m" ". devigator"` bit may be different if"
+  line "your created an alias for it."
+  horizon
+  echo
+}
+
+
+function listItems () {
+  horizon
+  for item in $@; do
+    line "$item"
+    horizon
+  done
+  echo
+}
+
+
+function notFound {
+    horizon
+    line "`color "31;1m" "Error:"` No such directory could be found."
+    line "Run `color "1m" "devigator help"` for available commands"
+    horizon
+    echo
+}
+
+
+
+#########################################################################
+#########################################################################
+# And this is where the MAGIC happens.
+#########################################################################
+if [ -z "$1" ]; then
+  valid_directory=`cd $directory 2>/dev/null && pwd`
+  if [[ $valid_directory ]]; then
+    heading "Changed Directory"
+    goToDirectory $directory
+  else
+    heading "Invalid Request" "(bad directory)"
+    notFound
+  fi
+
+elif [[ "$1" == "ls" ]]; then
+  heading "Available Projects"
+  items=`cd $directory && ls` && listItems $items
+
+elif [[ "$1" == "help" ]]; then
+  heading "Available Commands"
+  getHelp
+
+elif [[ "$2" == "ls" ]]; then
+  items=`cd $directory$1 2>/dev/null && ls`
+  if [[ $items ]]; then
+    heading "Project Files" "($1)"
+    listItems $items
+  else
+    heading "Invalid Request" "($1)"
+    notFound
+  fi
+
+else
+  valid_directory=`cd $directory$1 2>/dev/null && pwd`
+  if [[ $valid_directory ]]; then
+    heading "Changed Directory"
+    goToDirectory $valid_directory
+  else
+    heading "Invalid Request" "($1)"
+    notFound
+  fi
+fi
