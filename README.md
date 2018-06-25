@@ -44,19 +44,29 @@ Assuming you have an available directory named `bandit`.
 
  DEVIGATOR
  Changed Directory 
------------------------------------------
+-------------------------------------------
  Now working out of: bandit 
------------------------------------------
+-------------------------------------------
  Git enabled: true
------------------------------------------
+-------------------------------------------
  Working branch: train_blueprints
------------------------------------------
+-------------------------------------------
+ Last Commit                           
+-------------------------------------------
+Committer: Mr Orange
+-------------------------------------------
+Commit Date: Fri Jul 30 08:32:45 1996 +1100
+-------------------------------------------
+Updated details on robbery location and crew.
+May have collected some background on Mr White,
+see crew.json for more.
+-------------------------------------------
  Repository Status                           
------------------------------------------
+-------------------------------------------
  M layout.html
  M loose_ends/crew.json
  ?? weapons.yml
------------------------------------------
+-------------------------------------------
 
 bandit $
 ```
