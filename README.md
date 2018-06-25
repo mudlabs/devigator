@@ -37,21 +37,21 @@ These may change or grow over time, But for now they are;
 _Remember: The `. devigator` bit may be different if you created an alias for it._
 
 ## Example Output
-Assuming you have an available directory named `bandit`.
+Assuming you have an available directory named `dogs`.
 
 ```
-~ $ . devigator bandit
+~ $ . devigator dogs
 
  DEVIGATOR
  Changed Directory 
 -------------------------------------------
- Now working out of: bandit 
+ Now working out of: dogs 
  Git enabled: true
- Working branch: train_blueprints
+ Working branch: bank_blueprints
 -------------------------------------------
  Last Commit                           
 -------------------------------------------
- Committer: Mr Orange
+ Committer: Freddy Newandyke
  Commit Date: Fri Jul 30 08:32:45 1996 +1100
  Updated details on robbery location and crew.
  May have collected some background on Mr White,
