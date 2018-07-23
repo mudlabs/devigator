@@ -9,11 +9,11 @@ function heading () {
 }
 
 function headline () {
-  printf "\e[$1 %-45s\e[0m\n" "$2"
+  printf "\e[$1 %-65s\e[0m\n" "$2"
 }
 
 function line () {
-  printf "%-45s\n" " $1 "
+  printf "%-65s\n" " $1 "
 }
 
 function color () {
@@ -22,7 +22,7 @@ function color () {
 
 
 function horizon {
-  echo ----------------------------------------------
+  echo -----------------------------------------------------------------
 }
 
 
@@ -83,7 +83,7 @@ function goToDirectory () {
       commmitter="`git log -1 --format=%cn`"            
       if [[ "$commmitter" != "" ]]; then
         committed="`git log -1 --format=%cd`"
-        commit="`git log -1 --format=%s`"
+        commit="`git log -1 --pretty=format:'%w(60,0,1)%s'`"
         headline "3;7m" "Last Commit"
         horizon
         line "Committer: `color "1m" "$commmitter"`"
@@ -105,7 +105,6 @@ function goToDirectory () {
           shopt -u extglob
         done
         unset IFS
-        horizon
       fi
     fi
     echo
