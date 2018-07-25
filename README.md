@@ -20,27 +20,23 @@ whenevery you move from project to project, or just want a quick overview is too
 ## Source it!
 Devigator must be sourced. But it's amazing how much extra effort typing `. devigator` or `source devigator` feels like. So create an alias for it in `~/.bash_profile`.
 
-I went with
-```
-alias dev=". devigator"
-```
+I went with `alias dev=". devigator"` and will be using that alias for the rest of the document.
+
 
 ## Available Commands
 These may change or grow over time, But for now they are;
 
-* `. devigator` - cd into your development directory
-* `. devigator ls` - display files/folder in root of development directory
-* `. devigatior help` - displays the available commands
-* `. devigator [project]` - cd into that project
-* `. devigator [project] ls` - display files/folders in root of project directory
-
-_Remember: The `. devigator` bit may be different if you created an alias for it._
+* `dev` - cd into your development directory
+* `dev ls` - list contents of development directory
+* `dev help` - displays the available commands
+* `dev your-project` - cd into that project
+* `dev your-project ls` - list contents of project directory
 
 ## Example Output
 Assuming you have an available directory named `dogs`.
 
 ```
-~ $ . devigator dogs
+~ $ dev dogs
 
  DEVIGATOR
  Changed Directory 
