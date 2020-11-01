@@ -50,7 +50,7 @@ fi
 
 #########################################################################
 #########################################################################
-# Only one VARIABLE. It should point to your developmend directory.
+# Only one VARIABLE. It should point to your development directory.
 #########################################################################
 directory=~/development/projects/;
 
