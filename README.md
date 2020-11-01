@@ -3,7 +3,8 @@ Devigator is a bash executable that makes it easy to inspect and jump around you
 
 ## How to use it
 1. Download the `devigator` plain text file into `/usr/local/bin`
-2. Change the `development` variable on line `54` to the path of your directory.
+    - `curl -fsSL https://raw.githubusercontent.com/mudlabs/devigator/master/devigator -o /usr/local/bin/devigator`
+2. Change the `development` variable on line `55` to the path of your projects directory.
 3. Optionally create an alias in `~/.bash_profile` that sources devigator for you. 
 
 ## Why use it?
