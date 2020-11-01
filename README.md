@@ -6,7 +6,7 @@ Devigator is a bash executable that makes it easy to inspect and jump around you
     - `curl -fsSL https://raw.githubusercontent.com/mudlabs/devigator/master/devigator -o /usr/local/bin/devigator`
 2. Change the `development` variable on line `55` to the path of your projects directory.
 3. Optionally create an alias in `~/.bash_profile` that sources devigator for you.
-    - If your running macOs Catalina and your default shell is `zsh` you can move all you aliases over to `~/.zshrc`. Or keep them in `.bash_profile` and just add this to the very top of your `.zshrc` file;<br/><br/>
+    - If your running macOS Catalina and your default shell is `zsh` you can move all you aliases over to `~/.zshrc`. Or keep them in `.bash_profile` and just add this to the very top of your `.zshrc` file;<br/><br/>
     
     ```zsh
     if [ -f ~/.bash_profile ]; then
